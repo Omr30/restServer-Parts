@@ -2,7 +2,10 @@ import mongoose from 'mongoose'
 
 const dbConnection = async() => {
     try {
-        await mongoose.connect(process.env.MONGODB)
+        mongoose.set('strictQuery', false);
+        await mongoose.connect(process.env.MONGODB, () => {
+            console.log("Connected to MongoDB");
+          });
         console.log('Base de datos online!');
     } catch (error) {
         console.log(error);
